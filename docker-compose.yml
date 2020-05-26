@@ -1,0 +1,49 @@
+version: "3"
+services:
+  assemblyscript:
+    build: ./assemblyscript
+    volumes:
+      - ./assemblyscript:/usr/src/app
+  blazor:
+    command: dotnet publish -c Release -o publish
+    image: mcr.microsoft.com/dotnet/core/sdk:latest
+    volumes:
+      - ./blazor:/usr/src/app
+    working_dir: /usr/src/app
+  go:
+    command: go build -o go.wasm
+    environment:
+      GOARCH: wasm
+      GOOS: js
+    image: golang:latest
+    volumes:
+      - ./go:/go/src/app
+    working_dir: /go/src/app
+  rust:
+    build: ./rust
+    # command: ./build.sh
+    volumes:
+      - ./rust:/usr/src/app
+    working_dir: /usr/src/app
+  tinygo:
+    command: tinygo build -o tinygo.wasm
+    environment:
+      GOARCH: wasm
+      GOOS: js
+    image: tinygo/tinygo:latest
+    volumes:
+      - ./go:/go/src/app
+    working_dir: /go/src/app
+  webapp:
+    command: npm start
+    # depends_on:
+    #   - assemblyscript
+    #   - go
+    #   - rust
+    #   - tinygo
+    image: node:latest
+    ports:
+      - "8085:80"
+    volumes:
+      - ./webapp:/usr/src/app
+    working_dir: /usr/src/app
