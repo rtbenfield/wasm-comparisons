@@ -21,7 +21,6 @@ services:
     working_dir: /go/src/app
   rust:
     build: ./rust
-    # command: ./build.sh
     volumes:
       - ./rust:/usr/src/app
     working_dir: /usr/src/app
@@ -35,15 +34,14 @@ services:
       - ./go:/go/src/app
     working_dir: /go/src/app
   webapp:
-    command: npm start
     # depends_on:
     #   - assemblyscript
     #   - go
     #   - rust
     #   - tinygo
-    image: node:latest
+    image: nginx:latest
     ports:
       - "8085:80"
     volumes:
-      - ./webapp:/usr/src/app
-    working_dir: /usr/src/app
+      - ./webapp:/usr/share/nginx/html:ro
+      - ./rust/pkg:/usr/share/nginx/html/rust:ro

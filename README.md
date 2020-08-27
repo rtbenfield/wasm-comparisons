@@ -2,14 +2,18 @@
 
 This repo contains a few examples of WebAssembly languages, frameworks, and tools for evaluation.
 
+It's still WIP and examples are not yet one-to-one comparisons.
+
 ## Running
 
-| Project        | Command                                  |
-| -------------- | ---------------------------------------- |
-| AssemblyScript | `docker-compose run --rm assemblyscript` |
-| Blazor         | `docker-compose run --rm blazor`         |
-| Go             | `docker-compose run --rm go`             |
-| Rust           | `docker-compose run --rm rust`           |
+| Project        | Command                                          |
+| -------------- | ------------------------------------------------ |
+| AssemblyScript | `docker-compose run --rm assemblyscript`         |
+| Blazor         | `docker-compose run --rm blazor`                 |
+| Go             | `docker-compose run --rm go`                     |
+| Rust           | `docker-compose run --rm rust`                   |
+| Tiny Go        | `docker-compose run --rm tinygo`                 |
+| Web App        | `docker-compose run --service-ports --rm webapp` |
 
 ## Bundle Size
 
